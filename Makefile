@@ -51,7 +51,7 @@ proto:
 	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
 	--grpc-gateway_out=pb --grpc-gateway_opt=paths=source_relative \
-	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=simple_bank \
+	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=bank \
 	proto/*.proto
 	statik -src=./doc/swagger -dest=./doc
 
@@ -60,5 +60,8 @@ evans:
 
 redis:
 	docker run --name redis -p 6379:6379 -d redis:7-alpine
+
+mock:
+	mockgen -destination db/mock/store.go -source db/sqlc/store.go
 
 .PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 new_migration db_docs db_schema sqlc test server mock proto evans redis

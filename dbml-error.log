@@ -1,0 +1,13 @@
+2023-07-06T10:21:35.162Z
+Error: ENOENT: no such file or directory, stat '/Users/F1795/GolandProjects/simplebank/doc/db.sql'
+    at Object.statSync (node:fs:1615:3)
+    at validateFilePlugin (/Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/lib/cli/validatePlugins/validatePlugins.js:10:28)
+    at /Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/lib/cli/utils.js:21:31
+    at Array.every (<anonymous>)
+    at validateInputFilePaths (/Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/lib/cli/utils.js:21:16)
+    at exportHandler (/Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/lib/cli/export.js:21:39)
+    at Object.dbml2sql (/Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/lib/cli/index.js:19:23)
+    at Object.<anonymous> (/Users/F1795/.nvm/versions/node/v18.16.0/lib/node_modules/@dbml/cli/bin/dbml2sql.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1254:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+

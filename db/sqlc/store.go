@@ -6,6 +6,11 @@ import (
 	"fmt"
 )
 
+type MockStore interface {
+	Querier
+	TransferTx(ctx context.Context, arg CreateTransferParams) (TransferTxResult, error)
+}
+
 type Store struct {
 	*Queries
 	db *sql.DB //  required to add new DB txn

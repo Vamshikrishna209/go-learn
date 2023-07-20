@@ -1,0 +1,62 @@
+Project Bank {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Bank Database
+  '''
+}
+
+Table users as U {
+  username varchar [pk]
+  hashed_pass varchar [not null]
+  full_name varchar [not null]
+  email varchar [unique, not null]
+  password_changed_at timestamptz [not null, default: '0001-01-01 00:00:00Z']
+  created_at timestamptz [not null, default: 'now()']
+}
+
+
+Table accounts as A {
+  id bigserial [pk]
+  owner varchar [not null]
+  currency varchar [not null]
+  created_at timestamptz [not null, default: 'now()']
+  balance bigint [not null, note: 'must be +ve']
+  Indexes {
+    owner
+    (owner, currency) [unique]
+  }
+}
+
+Table entries {
+  id bigserial [pk]
+  account_id bigint [not null]
+  created_at timestamptz [not null, default: 'now()']
+  amount bigint [not null, note: 'can be -ve or +ve']
+
+  Indexes {
+    account_id
+  }
+}
+
+Table transfers {
+  id bigserial [pk]
+  from_account_id bigint [not null]
+  to_account_id bigint [not null]
+  amount bigint [not null, note: 'must be +ve']
+  created_at timestamptz [not null, default: 'now()']
+
+  Indexes {
+    from_account_id
+    to_account_id
+    (from_account_id, to_account_id)
+  }
+}
+
+Ref: entries.account_id > A.id // many-to-one
+
+Ref: transfers.from_account_id > A.id
+
+Ref: transfers.to_account_id > A.id
+
+
+Ref: "users"."username" < "accounts"."owner"
